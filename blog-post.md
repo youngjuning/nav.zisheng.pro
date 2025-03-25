@@ -537,6 +537,6 @@ export default function Home() {
 
 ---
 
-如果你对这个项目感兴趣，可以在GitHub上查看完整代码：[nav.zisheng.pro](https://github.com/zishengpro/nav.zisheng.pro)
+如果你对这个项目感兴趣，可以在GitHub上查看完整代码：[nav.zisheng.pro](https://github.com/youngjuning/nav.zisheng.pro)
 
 欢迎点赞、评论和分享，谢谢阅读！

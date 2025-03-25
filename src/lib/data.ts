@@ -1,5 +1,4 @@
 import { WebsiteCategory } from './types';
-import { GithubOutlined, CodeOutlined, CloudOutlined, DatabaseOutlined, RobotOutlined, ToolOutlined, BookOutlined, GlobalOutlined } from '@ant-design/icons';
 
 export const websiteCategories: WebsiteCategory[] = [
   {

@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
-import { Layout as AntLayout, Menu, Input, Button, theme } from 'antd';
+import { Layout as AntLayout, Input, Button, theme } from 'antd';
 import { SearchOutlined, GithubOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 
-const { Header, Content, Sider } = AntLayout;
+const { Header, Content } = AntLayout;
 
 interface LayoutProps {
   children: ReactNode;
@@ -41,7 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ children, onSearch }) => {
             搜索
           </Button>
           <a 
-            href="https://github.com/zishengpro" 
+            href="https://github.com/youngjuning" 
             target="_blank" 
             rel="noopener noreferrer"
             className="ml-4 text-lg"
