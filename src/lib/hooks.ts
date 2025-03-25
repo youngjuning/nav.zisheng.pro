@@ -30,7 +30,7 @@ export function useIntersectionObserver<T extends HTMLElement>(
     };
   }, [options]);
 
-  return [elementRef, isVisible, intersectionRatio];
+  return [elementRef as RefObject<T>, isVisible, intersectionRatio];
 }
 
 /**
