@@ -1,12 +1,39 @@
-# 从零开始打造一个现代化的AI导航站
-
-![封面图](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d5bee8b7c7e74c6f9d944996d71f85b0~tplv-k3u1fbpfcp-zoom-crop-mark:1512:1512:1512:851.awebp)
+![Kapture 2025-03-26 at 07.06.53.gif](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/f27bcf86533f44759abe49dbfff373a2~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5YWo5qCI57Sr5Y2H:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzI1MTExMTc0NjYyODU1In0%3D&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1743030489&x-orig-sign=O841gB%2F0D%2FbV1b5IRuXwOAwp7fw%3D)
 
 ## 前言
 
 随着AI工具和开发资源的爆炸式增长，我们经常需要在各种网站和工具之间切换。为了解决这个问题，我决定开发一个现代化的导航站，集成常用的AI工具、开发资源和云服务等，并且实现平滑的滚动和菜单联动效果。本文将详细记录整个实现过程，包括技术选型、组件设计、样式处理和交互优化等方面。
 
-## 技术栈选择
+> 效果预览：https://zify-git-feat-antd-youngjunings-projects.vercel.app/
+
+## 提示词设计
+
+### 第一轮
+
+```md
+实现一个类似「一为导航」的AI导航站。请使用 Next.js 框架，结合antd5 组件库和antd icons 图标库来构建这个项目。
+
+主要需要实现的功能包括：
+
+1. 顶部导航栏
+2. 侧边菜单栏
+3. 搜索框
+4, 网站卡片分类展示。
+```
+
+这里用的模型是 Claude-3.7-Sonnet，用到了根据截图生成页面的能力：
+
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/e34d357453a743dbb397276b676cfc5f~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5YWo5qCI57Sr5Y2H:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzI1MTExMTc0NjYyODU1In0%3D&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1743030920&x-orig-sign=AOXw4hTktQesY9GrFszTV7jZ2UY%3D)
+
+### 第二轮
+
+第一轮 Trae 安装完依赖后就停下来了，我给他了一个提示词：组件和页面都没创建
+
+## 代码学习
+
+Trae 上得来终觉浅，绝知此事要躬行。作为程序员，代码永远是我们最好的伙伴，不能因为 AI 的出现而失去初心。
+
+### 技术栈选择（人）
 
 在开始项目之前，我首先确定了技术栈：
 
@@ -18,9 +45,9 @@
 
 这个技术栈组合可以帮助我们快速构建现代化的Web应用，同时保持良好的开发体验和性能。
 
-## 项目结构设计
+### 项目结构设计（AI）
 
-我采用了Next.js的App Router结构，整体项目结构如下：
+AI 采用了 Next.js 的 App Router 结构，整体项目结构如下：
 
 ```
 /src
@@ -41,9 +68,9 @@
 
 这种结构清晰地分离了页面、组件和数据，便于维护和扩展。
 
-## 数据模型设计
+### 数据模型设计（AI）
 
-首先，我定义了网站分类和网站的数据模型：
+首先，AI 定义了网站分类和网站的数据模型：
 
 ```typescript
 // types.ts
@@ -95,13 +122,16 @@ export const websiteCategories: WebsiteCategory[] = [
 ];
 ```
 
-## 自定义Hook实现
+### 自定义 Hook 实现（AI）
 
-为了实现平滑滚动和菜单联动效果，我创建了两个自定义Hook：
+为了实现平滑滚动和菜单联动效果，AI 创建了自定义 Hook：
 
-### 1. useIntersectionObserver
+#### 1. useIntersectionObserver
 
-这个Hook利用IntersectionObserver API监测元素的可见性：
+> 这种常用的基本社区都有人封装了，推荐使用 @react-hook/intersection-observer。
+> 提示词可以做一下优化：使用 npm 上下载量高的库实现相关功能。
+
+这个 Hook 利用 IntersectionObserver API 监测元素的可见性：
 
 ```typescript
 // hooks.ts
@@ -134,9 +164,9 @@ export function useIntersectionObserver<T extends HTMLElement>(
 }
 ```
 
-### 2. useHashValue
+#### 2. useHashValue
 
-这个Hook用于管理URL哈希值，实现URL与页面状态的同步：
+这个 Hook 用于管理 URL 哈希值，实现URL与页面状态的同步：
 
 ```typescript
 // hooks.ts
@@ -172,9 +202,9 @@ export function useHashValue(initialHash: string = ''): [string, (hash: string) 
 }
 ```
 
-## 组件实现
+### 组件实现（AI）
 
-### 1. WebsiteCard组件
+#### 1. WebsiteCard 组件
 
 这个组件用于展示单个网站的信息：
 
@@ -211,7 +241,7 @@ const WebsiteCard: React.FC<WebsiteCardProps> = ({ website }) => {
 };
 ```
 
-### 2. CategorySection组件
+#### 2. CategorySection 组件
 
 这个组件用于展示一个分类及其包含的网站：
 
@@ -258,7 +288,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({ category, onVisibilit
 };
 ```
 
-### 3. CategoryMenu组件
+#### 3. CategoryMenu 组件
 
 这个组件实现了左侧的分类菜单：
 
@@ -329,7 +359,7 @@ const CategoryMenu: React.FC<CategoryMenuProps> = ({ categories, selectedCategor
 };
 ```
 
-## 主页面实现
+### 主页面实现（AI）
 
 主页面整合了所有组件，并实现了核心逻辑：
 
@@ -478,45 +508,38 @@ export default function Home() {
 }
 ```
 
-## 解决Tailwind与Ant Design样式冲突
+### 解决 Tailwind 与 Ant Design 样式冲突（人）
 
-在项目中同时使用Tailwind CSS和Ant Design时，可能会遇到样式冲突问题。我采用了以下策略解决这个问题：
+> 实际问了 3 轮，AI 都不能很好地解决 antd 和 tailwind 样式冲突问题，最终是手动调整样式。
 
-1. **使用前缀类名**：在Tailwind配置中使用前缀，避免与Ant Design的类名冲突。
+在项目中同时使用 Tailwind CSS 和 Ant Design 时，可能会遇到样式冲突问题。我采用了以下策略解决这个问题：
 
-2. **优先使用Tailwind的工具类**：对于布局和间距等样式，优先使用Tailwind的原子类，保持样式的一致性。
+1. **使用前缀类名**：在 Tailwind 配置中使用前缀，避免与 Ant Design 的类名冲突。
+2. **优先使用Tailwind的工具类**：对于布局和间距等样式，优先使用 Tailwind 的原子类，保持样式的一致性。
+3. **组件级别的样式隔离**：对于复杂组件，使用 CSS Modules 或 styled-components 进行样式隔离。
+4. **明确的样式优先级**：在必要时使用 `!important` 或更具体的选择器提高样式优先级。
 
-3. **组件级别的样式隔离**：对于复杂组件，使用CSS Modules或styled-components进行样式隔离。
-
-4. **明确的样式优先级**：在必要时使用`!important`或更具体的选择器提高样式优先级。
-
-## 实现平滑滚动与菜单联动
+### 实现平滑滚动与菜单联动（AI）
 
 实现平滑滚动与菜单联动是本项目的核心功能之一，主要通过以下步骤实现：
 
 1. **使用IntersectionObserver监测可见性**：通过`useIntersectionObserver`自定义Hook监测每个分类区域的可见性。
-
 2. **计算最佳可见分类**：根据可见比例和位置信息，计算当前应该选中的分类。
-
 3. **双向绑定**：实现菜单点击滚动到对应区域，以及滚动时自动更新菜单选中状态。
-
 4. **URL同步**：使用URL哈希值同步当前选中的分类，支持刷新页面后恢复状态。
 
 这种实现方式不仅提供了良好的用户体验，还保持了URL的可分享性。
 
-## 性能优化
+### 性能优化
 
 为了提高应用性能，我采取了以下优化措施：
 
 1. **使用React.memo和useCallback**：减少不必要的重渲染。
-
 2. **懒加载和代码分割**：减少初始加载时间。
-
 3. **优化IntersectionObserver**：使用适当的阈值和根边距，减少不必要的回调触发。
-
 4. **状态管理优化**：只在必要时更新状态，避免级联更新。
 
-## 总结与展望
+## 总结与展望（AI&人）
 
 通过这个项目，我成功实现了一个现代化的AI导航站，具有以下特点：
 
@@ -537,6 +560,6 @@ export default function Home() {
 
 ---
 
-如果你对这个项目感兴趣，可以在GitHub上查看完整代码：[nav.zisheng.pro](https://github.com/youngjuning/nav.zisheng.pro)
+如果你对这个项目感兴趣，可以在GitHub上查看完整代码：[nav.zisheng.pro/feat/antd](https://github.com/youngjuning/nav.zisheng.pro/tree/feat/antd)
 
 欢迎点赞、评论和分享，谢谢阅读！

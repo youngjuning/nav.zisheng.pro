@@ -119,8 +119,8 @@ export default function Home() {
       <AntLayout className="bg-transparent">
         <Affix offsetTop={20}>
           <Sider 
-            width={200} 
-            style={{backgroundColor: 'transparent'}}
+            width={200}
+            style={{ backgroundColor: 'transparent' }}
           >
             <CategoryMenu 
               categories={websiteCategories} 
