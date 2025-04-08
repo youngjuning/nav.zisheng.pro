@@ -24,3 +24,11 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+a {
+  color: inherit !important;
+}
+
+a:hover {
+  color: #1677ff !important;
+}
